@@ -20,7 +20,11 @@ class KeywordFactory(factory.DjangoModelFactory):
 
     name = factory.Sequence(lambda n: f'Verbal {0}'.format(n))
     user_submitted = factory.SubFactory(UserFactory)
-    date_created = factory.Faker('date_object')
+
+    @factory.post_generation
+    def date_created(self, create, extracted, **kwargs):
+        if extracted:
+            self.date_created = extracted
 
 
 class TaskFactory(factory.DjangoModelFactory):
@@ -38,6 +42,10 @@ class TaskFactory(factory.DjangoModelFactory):
             for keyword in extracted:
                 self.keywords.add(keyword)
 
-    date_created = factory.Faker('date_object')
+    @factory.post_generation
+    def date_created(self, create, extracted, **kwargs):
+        if extracted:
+            self.date_created = extracted
+
     accepted = True
     retired = False
