@@ -1,5 +1,17 @@
 import factory
-from models import Task, Keyword
+from .models import Task, Keyword
+from django.contrib.auth.models import User
+
+
+class UserFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = User
+
+    username = factory.Sequence(lambda n: f'Username {0}'.format(n))
+    password = factory.Sequence(lambda n: f'secure-password{0}'.format(n))
+    email = factory.Sequence(lambda n: f'email{0}@gmail.com'.format(n))
+    first_name = factory.Sequence(lambda n: f'first{0}'.format(n))
+    last_name = factory.Sequence(lambda n: f'last{0}'.format(n))
 
 
 class KeywordFactory(factory.DjangoModelFactory):
@@ -27,4 +39,5 @@ class TaskFactory(factory.DjangoModelFactory):
                 self.keywords.add(keyword)
 
     date_created = factory.Faker('date_object')
+    accepted = True
     retired = False
