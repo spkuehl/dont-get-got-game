@@ -12,9 +12,10 @@ def test_keyword_factory(keyword_factory):
 
 @pytest.mark.django_db
 def test_task_factory(task_factory):
-    task = task_factory(has_default_keywords=True)
-    assert task.title == 'john0'
-    assert task.user_submitted == 'lennon0@thebeatles.com'
-    assert task.date_created == ('johnpassword')
+    mock_now = datetime.now()
+    task = task_factory(date_created = mock_now)
+    assert task.title == 'Make a player yawn. 0'
+    assert task.user_submitted.username == 'Username 0'
+    assert task.date_created == mock_now
     assert task.accepted == True
     assert task.retired == False
