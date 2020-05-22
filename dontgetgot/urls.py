@@ -1,5 +1,4 @@
-"""dontgetgot URL Configuration
-
+"""myproject URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
@@ -14,8 +13,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+from tasks import views as tasks_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    # paths for our app
+    path('entry/', tasks_views.frontend),
+    path('entry/keyword/', tasks_views.frontend),
+    path('entry/task/', tasks_views.frontend),
 ]
