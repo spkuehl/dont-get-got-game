@@ -14,14 +14,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
 
 from tasks import views as tasks_views
+
+router = routers.DefaultRouter()
+router.register(r'users', tasks_views.UserViewSet)
+router.register(r'keywords', tasks_views.KeywordViewSet)
+router.register(r'tasks', tasks_views.TaskViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-
-    # paths for our app
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(router.urls)),
     path('entry/', tasks_views.frontend),
     path('entry/keyword/', tasks_views.frontend),
     path('entry/task/', tasks_views.frontend),
