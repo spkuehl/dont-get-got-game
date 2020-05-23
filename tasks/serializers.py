@@ -15,7 +15,7 @@ class KeywordSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['name', 'user_submitted', 'date_created']
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
         fields = ['title', 'user_submitted', 'keywords', 'date_created',
