@@ -28,7 +28,4 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/', include(router.urls)),
-    path('entry/', tasks_views.frontend),
-    path('entry/keyword/', tasks_views.frontend),
-    path('entry/task/', tasks_views.frontend),
 ]
